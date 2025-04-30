@@ -1,5 +1,7 @@
 // @ts-check
 
+/// <reference types="./eslint-plugin-import" />
+
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
@@ -42,4 +44,7 @@ export default tseslint.config(
   eslintPluginReactHooks.configs["recommended-latest"],
   eslintPluginJsxA11y.flatConfigs.recommended,
   eslintConfigPrettier,
+  {
+    ignores: ["webpack.config.js", "eslint.config.mjs"],
+  },
 );
