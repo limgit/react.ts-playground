@@ -1,6 +1,7 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
+import { TanStackRouterWebpack } from "@tanstack/router-plugin/webpack";
 
 const __dirname = import.meta.dirname;
 
@@ -40,6 +41,10 @@ export default (_, argv) => {
       },
     },
     plugins: [
+      TanStackRouterWebpack({
+        target: "react",
+        quoteStyle: "double",
+      }),
       new CopyWebpackPlugin({
         patterns: [
           {
