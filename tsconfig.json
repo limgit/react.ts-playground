@@ -14,7 +14,7 @@
     "baseUrl": "./",
     "module": "esnext",
     "moduleResolution": "node",
-    "lib": ["es2015", "es2017", "dom"],
+    "lib": ["ESNext", "dom"],
     "removeComments": true,
     "jsx": "react-jsx",
     "paths": {
