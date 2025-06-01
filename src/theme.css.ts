@@ -1,4 +1,4 @@
-import { mauveDark } from "@radix-ui/colors";
+import { iris } from "@radix-ui/colors";
 import { createTheme, layer } from "@vanilla-extract/css";
 
 export const themeLayer = layer("theme");
@@ -23,6 +23,6 @@ function convertRadixColor<
 export const [theme, vars] = createTheme({
   "@layer": themeLayer,
   colors: {
-    ...convertRadixColor("mauve", "primary", mauveDark),
+    ...convertRadixColor("iris", "primary", iris),
   },
 });

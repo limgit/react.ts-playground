@@ -1,9 +1,13 @@
+import { IntervalRefreshButton } from "@/components/IntervalRefreshButton";
 import { createFileRoute } from "@tanstack/react-router";
 
 function Index() {
   return (
     <div>
-      <h3>Welcome Home!</h3>
+      <IntervalRefreshButton
+        intervalSeconds={10}
+        onRefresh={() => console.log("Hello from the button")}
+      />
     </div>
   );
 }
