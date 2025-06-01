@@ -2,8 +2,9 @@ import { vars } from "@/theme.css";
 import { keyframes, style } from "@vanilla-extract/css";
 import { ROTATING_SECONDS } from "./intervalRefreshButton.service";
 
-export const textPosition = style({
+export const textStyle = style({
   position: "absolute",
+  fontSize: "0.75rem",
 });
 
 const rotateKeyframe = keyframes({

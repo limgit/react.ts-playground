@@ -11,14 +11,14 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root"
-import { Route as AboutImport } from "./routes/about"
+import { Route as IntervalRefreshImport } from "./routes/interval-refresh"
 import { Route as IndexImport } from "./routes/index"
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
-  id: "/about",
-  path: "/about",
+const IntervalRefreshRoute = IntervalRefreshImport.update({
+  id: "/interval-refresh",
+  path: "/interval-refresh",
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,11 +39,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    "/about": {
-      id: "/about"
-      path: "/about"
-      fullPath: "/about"
-      preLoaderRoute: typeof AboutImport
+    "/interval-refresh": {
+      id: "/interval-refresh"
+      path: "/interval-refresh"
+      fullPath: "/interval-refresh"
+      preLoaderRoute: typeof IntervalRefreshImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +53,37 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
-  "/about": typeof AboutRoute
+  "/interval-refresh": typeof IntervalRefreshRoute
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
-  "/about": typeof AboutRoute
+  "/interval-refresh": typeof IntervalRefreshRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   "/": typeof IndexRoute
-  "/about": typeof AboutRoute
+  "/interval-refresh": typeof IntervalRefreshRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/about"
+  fullPaths: "/" | "/interval-refresh"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/about"
-  id: "__root__" | "/" | "/about"
+  to: "/" | "/interval-refresh"
+  id: "__root__" | "/" | "/interval-refresh"
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  IntervalRefreshRoute: typeof IntervalRefreshRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  IntervalRefreshRoute: IntervalRefreshRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +97,14 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/interval-refresh"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/interval-refresh": {
+      "filePath": "interval-refresh.tsx"
     }
   }
 }

@@ -1,17 +1,6 @@
-import { IntervalRefreshButton } from "@/components/IntervalRefreshButton";
+import { Home } from "@/pages/home";
 import { createFileRoute } from "@tanstack/react-router";
 
-function Index() {
-  return (
-    <div>
-      <IntervalRefreshButton
-        intervalSeconds={10}
-        onRefresh={() => console.log("Hello from the button")}
-      />
-    </div>
-  );
-}
-
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: Home,
 });

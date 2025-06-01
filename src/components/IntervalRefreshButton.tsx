@@ -3,9 +3,9 @@ import { clsx } from "clsx";
 import { RotateCcwIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
-  textPosition,
   refreshButtonStyle,
   rotateAnimation,
+  textStyle,
 } from "./intervalRefreshButton.css";
 import { ROTATING_SECONDS } from "./intervalRefreshButton.service";
 
@@ -41,9 +41,9 @@ export function IntervalRefreshButton({
     let timeout: number | null = null;
     if (seconds === 0) {
       if (timerRef.current) clearInterval(timerRef.current);
+      onRefresh(); // refresh triggers immediately. The other things are purely UI-related.
       timeout = setTimeout(() => {
         setSeconds(intervalSeconds);
-        onRefresh();
         timerRef.current = setInterval(() => {
           setSeconds((prev) => prev - 1);
         }, 1000);
@@ -64,7 +64,7 @@ export function IntervalRefreshButton({
         size={30}
         className={clsx(seconds === 0 && rotateAnimation)}
       />
-      <span className={textPosition}>{seconds}</span>
+      <span className={textStyle}>{seconds}</span>
     </Button>
   );
 }
