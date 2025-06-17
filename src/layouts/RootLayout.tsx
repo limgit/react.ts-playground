@@ -32,6 +32,7 @@ export function RootLayout() {
       <nav className={navStyle}>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/interval-refresh">Interval refresh</NavLink>
+        <NavLink to="/qrcode-generator">QR code generator</NavLink>
       </nav>
       <main className={mainStyle}>
         <Outlet />

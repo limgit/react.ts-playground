@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root"
+import { Route as QrcodeGeneratorImport } from "./routes/qrcode-generator"
 import { Route as IntervalRefreshImport } from "./routes/interval-refresh"
 import { Route as IndexImport } from "./routes/index"
 
 // Create/Update Routes
+
+const QrcodeGeneratorRoute = QrcodeGeneratorImport.update({
+  id: "/qrcode-generator",
+  path: "/qrcode-generator",
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IntervalRefreshRoute = IntervalRefreshImport.update({
   id: "/interval-refresh",
@@ -46,6 +53,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IntervalRefreshImport
       parentRoute: typeof rootRoute
     }
+    "/qrcode-generator": {
+      id: "/qrcode-generator"
+      path: "/qrcode-generator"
+      fullPath: "/qrcode-generator"
+      preLoaderRoute: typeof QrcodeGeneratorImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module "@tanstack/react-router" {
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
+  "/qrcode-generator": typeof QrcodeGeneratorRoute
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
+  "/qrcode-generator": typeof QrcodeGeneratorRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
+  "/qrcode-generator": typeof QrcodeGeneratorRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/interval-refresh"
+  fullPaths: "/" | "/interval-refresh" | "/qrcode-generator"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/interval-refresh"
-  id: "__root__" | "/" | "/interval-refresh"
+  to: "/" | "/interval-refresh" | "/qrcode-generator"
+  id: "__root__" | "/" | "/interval-refresh" | "/qrcode-generator"
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IntervalRefreshRoute: typeof IntervalRefreshRoute
+  QrcodeGeneratorRoute: typeof QrcodeGeneratorRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IntervalRefreshRoute: IntervalRefreshRoute,
+  QrcodeGeneratorRoute: QrcodeGeneratorRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/interval-refresh"
+        "/interval-refresh",
+        "/qrcode-generator"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/interval-refresh": {
       "filePath": "interval-refresh.tsx"
+    },
+    "/qrcode-generator": {
+      "filePath": "qrcode-generator.tsx"
     }
   }
 }
