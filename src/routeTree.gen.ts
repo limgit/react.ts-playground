@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root"
+import { Route as QrcodeGeneratorRouteImport } from "./routes/qrcode-generator"
 import { Route as IntervalRefreshRouteImport } from "./routes/interval-refresh"
 import { Route as IndexRouteImport } from "./routes/index"
 
+const QrcodeGeneratorRoute = QrcodeGeneratorRouteImport.update({
+  id: "/qrcode-generator",
+  path: "/qrcode-generator",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IntervalRefreshRoute = IntervalRefreshRouteImport.update({
   id: "/interval-refresh",
   path: "/interval-refresh",
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
+  "/qrcode-generator": typeof QrcodeGeneratorRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
+  "/qrcode-generator": typeof QrcodeGeneratorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
+  "/qrcode-generator": typeof QrcodeGeneratorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/interval-refresh"
+  fullPaths: "/" | "/interval-refresh" | "/qrcode-generator"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/interval-refresh"
-  id: "__root__" | "/" | "/interval-refresh"
+  to: "/" | "/interval-refresh" | "/qrcode-generator"
+  id: "__root__" | "/" | "/interval-refresh" | "/qrcode-generator"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IntervalRefreshRoute: typeof IntervalRefreshRoute
+  QrcodeGeneratorRoute: typeof QrcodeGeneratorRoute
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
+    "/qrcode-generator": {
+      id: "/qrcode-generator"
+      path: "/qrcode-generator"
+      fullPath: "/qrcode-generator"
+      preLoaderRoute: typeof QrcodeGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/interval-refresh": {
       id: "/interval-refresh"
       path: "/interval-refresh"
@@ -71,6 +88,7 @@ declare module "@tanstack/react-router" {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IntervalRefreshRoute: IntervalRefreshRoute,
+  QrcodeGeneratorRoute: QrcodeGeneratorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
