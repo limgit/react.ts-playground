@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from "./routes/__root"
 import { Route as IntervalRefreshImport } from "./routes/interval-refresh"
+import { Route as ChessImport } from "./routes/chess"
 import { Route as IndexImport } from "./routes/index"
 
 // Create/Update Routes
@@ -19,6 +20,12 @@ import { Route as IndexImport } from "./routes/index"
 const IntervalRefreshRoute = IntervalRefreshImport.update({
   id: "/interval-refresh",
   path: "/interval-refresh",
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ChessRoute = ChessImport.update({
+  id: "/chess",
+  path: "/chess",
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,6 +46,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    "/chess": {
+      id: "/chess"
+      path: "/chess"
+      fullPath: "/chess"
+      preLoaderRoute: typeof ChessImport
+      parentRoute: typeof rootRoute
+    }
     "/interval-refresh": {
       id: "/interval-refresh"
       path: "/interval-refresh"
@@ -53,36 +67,41 @@ declare module "@tanstack/react-router" {
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
+  "/chess": typeof ChessRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
+  "/chess": typeof ChessRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   "/": typeof IndexRoute
+  "/chess": typeof ChessRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/interval-refresh"
+  fullPaths: "/" | "/chess" | "/interval-refresh"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/interval-refresh"
-  id: "__root__" | "/" | "/interval-refresh"
+  to: "/" | "/chess" | "/interval-refresh"
+  id: "__root__" | "/" | "/chess" | "/interval-refresh"
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChessRoute: typeof ChessRoute
   IntervalRefreshRoute: typeof IntervalRefreshRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChessRoute: ChessRoute,
   IntervalRefreshRoute: IntervalRefreshRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/chess",
         "/interval-refresh"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/chess": {
+      "filePath": "chess.tsx"
     },
     "/interval-refresh": {
       "filePath": "interval-refresh.tsx"
