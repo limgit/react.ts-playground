@@ -24,6 +24,7 @@ export const [theme, vars] = createTheme({
   "@layer": themeLayer,
   colors: {
     ...convertRadixColor("iris", "primary", iris),
+    primaryContrast: "#fff",
     ...convertRadixColor("gray", "gray", gray),
   },
 });

@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from "./routes/__root"
 import { Route as IntervalRefreshRouteImport } from "./routes/interval-refresh"
+import { Route as ChessRouteImport } from "./routes/chess"
 import { Route as IndexRouteImport } from "./routes/index"
 
 const IntervalRefreshRoute = IntervalRefreshRouteImport.update({
   id: "/interval-refresh",
   path: "/interval-refresh",
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChessRoute = ChessRouteImport.update({
+  id: "/chess",
+  path: "/chess",
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
+  "/chess": typeof ChessRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
+  "/chess": typeof ChessRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/": typeof IndexRoute
+  "/chess": typeof ChessRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: "/" | "/interval-refresh"
+  fullPaths: "/" | "/chess" | "/interval-refresh"
   fileRoutesByTo: FileRoutesByTo
-  to: "/" | "/interval-refresh"
-  id: "__root__" | "/" | "/interval-refresh"
+  to: "/" | "/chess" | "/interval-refresh"
+  id: "__root__" | "/" | "/chess" | "/interval-refresh"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChessRoute: typeof ChessRoute
   IntervalRefreshRoute: typeof IntervalRefreshRoute
 }
 
@@ -56,6 +66,13 @@ declare module "@tanstack/react-router" {
       path: "/interval-refresh"
       fullPath: "/interval-refresh"
       preLoaderRoute: typeof IntervalRefreshRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/chess": {
+      id: "/chess"
+      path: "/chess"
+      fullPath: "/chess"
+      preLoaderRoute: typeof ChessRouteImport
       parentRoute: typeof rootRouteImport
     }
     "/": {
@@ -70,6 +87,7 @@ declare module "@tanstack/react-router" {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChessRoute: ChessRoute,
   IntervalRefreshRoute: IntervalRefreshRoute,
 }
 export const routeTree = rootRouteImport

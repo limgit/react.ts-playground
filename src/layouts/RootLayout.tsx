@@ -31,6 +31,7 @@ export function RootLayout() {
     <div className={containerStyle}>
       <nav className={navStyle}>
         <NavLink to="/">Home</NavLink>
+        <NavLink to="/chess">Chess</NavLink>
         <NavLink to="/interval-refresh">Interval refresh</NavLink>
       </nav>
       <main className={mainStyle}>

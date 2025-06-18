@@ -9,7 +9,7 @@ export const containerStyle = style({
 export const navStyle = style({
   padding: "2px",
   height: "100%",
-  width: "240px",
+  minWidth: "240px",
   borderRight: `1px solid ${vars.colors.primary6}`,
 
   display: "flex",
