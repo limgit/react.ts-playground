@@ -1,4 +1,4 @@
-import { iris } from "@radix-ui/colors";
+import { gray, iris } from "@radix-ui/colors";
 import { createTheme, layer } from "@vanilla-extract/css";
 
 export const themeLayer = layer("theme");
@@ -24,5 +24,6 @@ export const [theme, vars] = createTheme({
   "@layer": themeLayer,
   colors: {
     ...convertRadixColor("iris", "primary", iris),
+    ...convertRadixColor("gray", "gray", gray),
   },
 });
