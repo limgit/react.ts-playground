@@ -8,65 +8,34 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from "./routes/__root"
+import { Route as IntervalRefreshRouteImport } from "./routes/interval-refresh"
+import { Route as IndexRouteImport } from "./routes/index"
 
-import { Route as rootRoute } from "./routes/__root"
-import { Route as IntervalRefreshImport } from "./routes/interval-refresh"
-import { Route as IndexImport } from "./routes/index"
-
-// Create/Update Routes
-
-const IntervalRefreshRoute = IntervalRefreshImport.update({
+const IntervalRefreshRoute = IntervalRefreshRouteImport.update({
   id: "/interval-refresh",
   path: "/interval-refresh",
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module "@tanstack/react-router" {
-  interface FileRoutesByPath {
-    "/": {
-      id: "/"
-      path: "/"
-      fullPath: "/"
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    "/interval-refresh": {
-      id: "/interval-refresh"
-      path: "/interval-refresh"
-      fullPath: "/interval-refresh"
-      preLoaderRoute: typeof IntervalRefreshImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
-
 export interface FileRoutesByTo {
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   "/": typeof IndexRoute
   "/interval-refresh": typeof IntervalRefreshRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: "/" | "/interval-refresh"
@@ -75,37 +44,34 @@ export interface FileRouteTypes {
   id: "__root__" | "/" | "/interval-refresh"
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IntervalRefreshRoute: typeof IntervalRefreshRoute
+}
+
+declare module "@tanstack/react-router" {
+  interface FileRoutesByPath {
+    "/interval-refresh": {
+      id: "/interval-refresh"
+      path: "/interval-refresh"
+      fullPath: "/interval-refresh"
+      preLoaderRoute: typeof IntervalRefreshRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    "/": {
+      id: "/"
+      path: "/"
+      fullPath: "/"
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IntervalRefreshRoute: IntervalRefreshRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/interval-refresh"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/interval-refresh": {
-      "filePath": "interval-refresh.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
