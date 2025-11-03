@@ -13,7 +13,7 @@
     "target": "es6",
     "baseUrl": "./",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "lib": ["ESNext", "dom"],
     "removeComments": true,
     "jsx": "react-jsx",
